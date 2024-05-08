@@ -229,12 +229,11 @@
         </tr>
     </table>
 
-    <button onclick="calculateMargin()">粗利率計算</button>
 
 
 
     <script>
-
+// 日付
 document.getElementById("today").innerHTML = today();
   function today() {
     const now = new Date();
@@ -246,15 +245,22 @@ document.getElementById("today").innerHTML = today();
     return today;
   }
 
-  function calculateMargin() {
-    var sellingPrice = document.getElementsByName("jistutanka1")[0].value;
-    var costPrice = document.getElementsByName("tokune1")[0].value;
+//   粗利率計算
+window.onload = function() {
+    document.getElementsByName("jistutanka1")[0].addEventListener('input', calculateMargin);
+    document.getElementsByName("tokune1")[0].addEventListener('input', calculateMargin);
+};
 
+function calculateMargin() {
+    let sellingPrice = document.getElementsByName("jistutanka1")[0].value;
+    let costPrice = document.getElementsByName("tokune1")[0].value;
+
+    // 入力がある場合のみ計算を実行
     if (sellingPrice && costPrice) {
-        var margin = ((sellingPrice - costPrice) / sellingPrice) * 100;
+        let margin = ((sellingPrice - costPrice) / sellingPrice) * 100;
         document.getElementById("margin1").innerText = margin.toFixed(2) + "%";
     } else {
-        document.getElementById("margin1").innerText = "売価と原価を両方入力してください。";
+        document.getElementById("margin1").innerText = "0%";
     }
 }
 
