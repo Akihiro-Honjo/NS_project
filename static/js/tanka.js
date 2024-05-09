@@ -1,5 +1,8 @@
 // 日付
-document.getElementById("today").innerHTML = today();
+$(function() {
+    $('#today').text(today());
+});
+
 function today() {
     const now = new Date();
     const year = now.getFullYear();
@@ -10,21 +13,21 @@ function today() {
     return today;
 }
 
+
 //   粗利率計算
-window.onload = function() {
-    document.getElementsByName("jistutanka1")[0].addEventListener('input', calculateMargin);
-    document.getElementsByName("tokune1")[0].addEventListener('input', calculateMargin);
-};
+$(function() {
+    $('input[name="jistutanka1"], input[name="tokune1"]').on('input', calculateMargin);
+});
 
 function calculateMargin() {
-    let sellingPrice = document.getElementsByName("jistutanka1")[0].value;
-    let costPrice = document.getElementsByName("tokune1")[0].value;
+    let sellingPrice = $('input[name="jistutanka1"]').val();
+    let costPrice = $('input[name="tokune1"]').val();
 
     // 入力がある場合のみ計算を実行
     if (sellingPrice && costPrice) {
         let margin = ((sellingPrice - costPrice) / sellingPrice) * 100;
-        document.getElementById("margin1").innerText = margin.toFixed(2) + "%";
+        $('#margin1').text(margin.toFixed(2) + "%");
     } else {
-        document.getElementById("margin1").innerText = "0%";
+        $('#margin1').text("0%");
     }
 }
